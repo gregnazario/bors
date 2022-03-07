@@ -31,21 +31,30 @@ impl Webhook {
         // Skip validation if no key
         // FIXME: Refactor code so it's required
         if key.is_none() {
-            warn!("[webhook {}] No secret specified; signature ignored", self.delivery_id);
-            return true
+            warn!(
+                "[webhook {}] No secret specified; signature ignored",
+                self.delivery_id
+            );
+            return true;
         }
 
         if let Some(ref signature) = self.signature_256 {
-            let hash = hex::encode(hmacsha1::hmac_sha1(key.unwrap(), &self.body));
+            let hash = hex::encode(hmac_sha256::HMAC::mac(&self.body, key.unwrap()));
             let signature = &signature["sha256=".len()..];
 
-            debug!("[webhook {}] SHA-256 Found: {} Expected: {}", self.delivery_id, signature, hash);
+            debug!(
+                "[webhook {}] SHA-256 Found: {} Expected: {}",
+                self.delivery_id, signature, hash
+            );
             signature == hash
         } else if let Some(ref signature) = self.signature {
             let hash = hex::encode(hmacsha1::hmac_sha1(key.unwrap(), &self.body));
             let signature = &signature["sha1=".len()..];
 
-            debug!("[webhook {}] SHA-1 Found: {} Expected: {}", self.delivery_id, signature, hash);
+            debug!(
+                "[webhook {}] SHA-1 Found: {} Expected: {}",
+                self.delivery_id, signature, hash
+            );
             signature == hash
         } else {
             // There is no signature, reject it
