@@ -47,15 +47,6 @@ impl Webhook {
                 self.delivery_id, signature, hash
             );
             signature == hash
-        } else if let Some(ref signature) = self.signature {
-            let hash = hex::encode(hmacsha1::hmac_sha1(key.unwrap(), &self.body));
-            let signature = &signature["sha1=".len()..];
-
-            debug!(
-                "[webhook {}] SHA-1 Found: {} Expected: {}",
-                self.delivery_id, signature, hash
-            );
-            signature == hash
         } else {
             // There is no signature, reject it
             warn!("[webhook {}] No signature present", self.delivery_id);
