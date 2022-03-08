@@ -35,7 +35,7 @@ impl Webhook {
                 "[webhook {}] No secret specified; signature ignored",
                 self.delivery_id
             );
-            return true;
+            return false;
         }
 
         if let Some(ref signature) = self.signature_256 {
