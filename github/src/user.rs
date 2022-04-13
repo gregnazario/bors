@@ -32,6 +32,7 @@ pub struct User {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Team {
     id: u64,
     node_id: NodeId,
@@ -48,12 +49,14 @@ pub struct Team {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Pusher {
     name: String,
     email: String,
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Key {
     id: u64,
     key: String,

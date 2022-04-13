@@ -27,6 +27,7 @@ pub struct Reaction {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct ReactionSummary {
     total_count: usize,
     #[serde(rename = "+1")]

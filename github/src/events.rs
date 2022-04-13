@@ -544,6 +544,7 @@ pub struct GithubAppAuthorizationEvent {
 
 // Page represents a single Wiki page.
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Page {
     page_name: String,
     title: String,

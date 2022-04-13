@@ -2,6 +2,7 @@ use super::{DateTime, EventType};
 use serde::Deserialize;
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct Hook {
     #[serde(rename = "type")]
     hook_type: String,
@@ -19,6 +20,7 @@ pub struct Hook {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct HookConfig {
     content_type: String,
     insecure_ssl: String,
@@ -27,6 +29,7 @@ pub struct HookConfig {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct HookResponse {
     code: Option<String>,
     status: String,

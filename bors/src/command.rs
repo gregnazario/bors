@@ -17,7 +17,6 @@ pub struct ParseCommandError;
 
 #[derive(Debug)]
 pub struct Command {
-    cmd: String,
     command_type: CommandType,
 }
 
@@ -51,7 +50,6 @@ impl Command {
             .map(Self::from_line)
     }
 
-    #[allow(dead_code)]
     pub fn from_comment_with_username(
         c: &str,
         my_username: &str,
@@ -68,10 +66,7 @@ impl Command {
 
         let command_type = Self::from_iter(s.split_whitespace().skip(1))?;
 
-        Ok(Command {
-            cmd: s.to_owned(),
-            command_type,
-        })
+        Ok(Command { command_type })
     }
 
     fn line_starts_with_username(line: &str, my_username: &str) -> bool {
@@ -91,10 +86,7 @@ impl Command {
 
         let command_type = Self::from_iter(s[1..].split_whitespace())?;
 
-        Ok(Command {
-            cmd: s.to_owned(),
-            command_type,
-        })
+        Ok(Command { command_type })
     }
 
     fn from_iter<'a, I>(iter: I) -> Result<CommandType, ParseCommandError>
@@ -352,7 +344,10 @@ impl Command {
         match ctx.pr().status {
             Status::InReview => {
                 let canary_running = if let Some(board) = ctx.project_board() {
-                    board.list_canary_cards(&ctx).await.map_or(false, |cards| cards.len() > 0)
+                    board
+                        .list_canary_cards(&ctx)
+                        .await
+                        .map_or(false, |cards| cards.len() > 0)
                 } else {
                     false
                 };

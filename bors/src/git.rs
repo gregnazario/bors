@@ -10,6 +10,7 @@ use std::{
 const REPOS_DIR: &str = "repos";
 
 #[derive(Debug)]
+#[allow(dead_code)]
 pub struct GitRepository {
     directory: PathBuf,
     github_repo: Repo,

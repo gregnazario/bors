@@ -55,6 +55,7 @@ pub struct CheckOutput {
 
 // Maybe rename these?
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct CheckPullRequest {
     url: String,
     id: u64,
@@ -64,6 +65,7 @@ pub struct CheckPullRequest {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct CheckBranch {
     #[serde(rename = "ref")]
     git_ref: String,
@@ -72,6 +74,7 @@ pub struct CheckBranch {
 }
 
 #[derive(Clone, Debug, Deserialize)]
+#[allow(dead_code)]
 pub struct CheckRepo {
     id: u64,
     url: String,
